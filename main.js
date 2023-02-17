@@ -127,15 +127,12 @@ var options = {
 function createGUI() {
   var gui = new GUI();
   var camGUI = gui.addFolder("Camera");
-  //cam.add(, 'speed', 0.0, 30.00).listen();
   camGUI.add(camera.position, "z", 3, 20).name("Zoom").listen();
   camGUI.add(options.perlin, "vel", 0.0, 0.02).name("Velocity").listen();
-  //camGUI.open();
 
   var mathGUI = gui.addFolder("Math Options");
   mathGUI.add(options.spin, "sinVel", 0.0, 0.5).name("Sine").listen();
   mathGUI.add(options.spin, "ampVel", 0.0, 90.0).name("Amplitude").listen();
-  //mathGUI.open();
 
   var perlinGUI = gui.addFolder("Setup Perlin Noise");
   perlinGUI.add(options.perlin, "perlins", 1.0, 5.0).name("Size").step(1);

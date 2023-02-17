@@ -44,6 +44,7 @@ canvas {
   align-items: center;
   justify-content: center;
   text-align: center;
+  background: transparent;
 }
 
 .title {
@@ -93,6 +94,8 @@ a {
   position: relative;
   transition: all 0.3s ease-in-out;
   padding-right: 20px;
+  opacity: 0;
+  animation: entrance .7s cubic-bezier(.25,.46,.45,.94) 1.5s forwards;
 }
 
 a::before {
@@ -134,4 +137,32 @@ a:hover {
 
 a:hover span {
   margin-right: 0;
+}
+
+h1, p {
+  opacity: 0;
+  animation:focus-in-contract .7s cubic-bezier(.25,.46,.45,.94) 1s both;
+}
+
+@keyframes focus-in-contract{
+  0%{
+    letter-spacing:1rem;
+    filter:blur(12px);
+    opacity:0;
+  }
+  100%{
+    filter:blur(0);
+    opacity:1;
+  }
+}
+
+@keyframes entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
