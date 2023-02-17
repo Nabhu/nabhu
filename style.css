@@ -7,10 +7,19 @@ body {
   font-size: 16px;
 }
 
+@media screen and (max-width: 792px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
+  background: #ebe9e3;
 }
+
 
 #app {
   position: absolute;
@@ -43,6 +52,7 @@ canvas {
   position: relative;
   margin-top: 0;
   margin-bottom: 20px;
+  cursor: default;
 }
 
 .title span {
@@ -60,6 +70,7 @@ h1 {
   margin-bottom: 0;
   font-size: 1.5rem;
   font-weight: normal;
+  cursor: default;
 }
 
 h1 span {
@@ -68,4 +79,59 @@ h1 span {
   font-size: 1rem;
   margin-top: 4px;
   font-style: italic;
+}
+
+a {
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  margin-top: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  padding-right: 20px;
+}
+
+a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  background: black;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+a span {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+a svg {
+  width: 20px;
+  height: 20px;
+  stroke: white;
+}
+
+a:hover::before {
+  width: 100%;
+}
+
+a:hover {
+  color: white;
+}
+
+a:hover span {
+  margin-right: 0;
 }

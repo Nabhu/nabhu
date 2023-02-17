@@ -1,4 +1,3 @@
-import "./style.css";
 import { GUI } from "dat.gui";
 // Three JS
 window.addEventListener("load", init, false);
