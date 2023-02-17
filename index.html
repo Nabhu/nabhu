@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Raleway:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Nabhu - Développeur web freelance</title>
   </head>
   <body>
@@ -19,17 +19,40 @@
       <h1>
         Développeur web créatif freelance <span>Wordpress / Gutenberg</span>
       </h1>
-      <a href="mailto:bonjour@nabhu.fr" target="_blank"> 
+      <a href="mailto:bonjour@nabhu.fr" target="_blank">
         <span>
-          <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2" stroke-linecap="round"/>
+          <svg
+            width="800px"
+            height="800px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
           </svg>
         </span>
         Me contacter
       </a>
     </div>
     <div id="app"></div>
+    <div id="cursor">
+      <div class="cursor-dot"></div>
+      <div class="cursor-dot-outline"></div>
+    </div>
     <script id="vertexShader" type="x-shader/x-vertex">
       vec3 mod289(vec3 x)
       {

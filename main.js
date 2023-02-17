@@ -1,10 +1,13 @@
 import { GUI } from "dat.gui";
+import { cursor } from "./cursor.js";
+
 // Three JS
 window.addEventListener("load", init, false);
 
 function init() {
   createWorld();
   createPrimitive();
+  cursor.init();
   // createGUI();
   frontDetection();
   //---
