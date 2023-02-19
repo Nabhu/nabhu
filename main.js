@@ -8,6 +8,7 @@ function init() {
   createWorld();
   createPrimitive();
   cursor.init();
+  counter();
   // createGUI();
   frontDetection();
   //---
@@ -231,4 +232,122 @@ function incrementWaves(current_number, number_to_go) {
       incrementWaves(current_number + 0.5, number_to_go);
     }, 10);
   }
+}
+
+const counter = () => {
+  const html_counter = document.querySelector("#counter");
+  if (html_counter) {
+    const counter_number = html_counter.querySelector(".number");
+    const counter_sentence = html_counter.querySelector(".sentence");
+    counter_number.addEventListener("mouseover", setCount);
+
+    function setCount() {
+      switch (parseInt(html_counter.textContent, 10)) {
+        case 3:
+          html_counter.classList.remove("top");
+          html_counter.classList.add("bottom");
+          counter_number.textContent = "2";
+          break;
+        case 2:
+          html_counter.classList.remove("right");
+          html_counter.classList.add("left");
+          counter_number.textContent = "1";
+          break;
+        case 1:
+        default:
+          html_counter.classList.remove("bottom");
+          html_counter.classList.add("top");
+          html_counter.classList.add("random-shape");
+          counter_number.textContent = "3";
+          counter_sentence.textContent = "appuis sur la touche A";
+          counter_number.removeEventListener("mouseover", setCount);
+          window.addEventListener("keydown", setRandomShape);
+          break;
+      }
+    }
+
+    function setRandomShape(event) {
+      if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+
+      if (
+        event.key === "a" &&
+        (html_counter.classList.contains("random-shape") ||
+          html_counter.classList.contains("succeed"))
+      ) {
+        if (html_counter.classList.contains("random-shape")) {
+          switch (parseInt(html_counter.textContent, 10)) {
+            case 3:
+              counter_number.textContent = "2";
+              break;
+            case 2:
+              counter_number.textContent = "1";
+              counter_sentence.textContent = "appui sur la touche A";
+              break;
+            case 1:
+            default:
+              counter_number.textContent = "3";
+              counter_sentence.textContent = "appuis sur la touche Z";
+              html_counter.classList.add("random-color");
+              html_counter.classList.remove("random-shape");
+              break;
+          }
+        }
+        camera.position.z = randomIntFromInterval(3, 16);
+        options.perlin.decay = randomFloatFromInterval(0, 0.3);
+        options.perlin.complex = randomFloatFromInterval(0.1, 1);
+        options.perlin.waves = randomIntFromInterval(0, 30);
+      }
+
+      if (
+        event.key === "z" &&
+        (html_counter.classList.contains("random-color") ||
+          html_counter.classList.contains("succeed"))
+      ) {
+        if (html_counter.classList.contains("random-color")) {
+          switch (parseInt(html_counter.textContent, 10)) {
+            case 3:
+              counter_number.textContent = "2";
+              break;
+            case 2:
+              counter_number.textContent = "1";
+              counter_sentence.textContent = "appui sur la touche Z";
+              break;
+            case 1:
+            default:
+              counter_number.textContent = "0";
+              html_counter.classList.remove("random-color");
+              html_counter.classList.add("succeed");
+              counter_sentence.textContent =
+                "Bravo ! Tu peux maintenant combiner les 2 ✌🏻";
+              break;
+          }
+        }
+        scene.remove(scene.children[0]);
+        document.getElementById("fragmentShader").textContent = `
+        void main() {
+          gl_FragColor = vec4(${randomIntFromInterval(
+            0,
+            255
+          )}., ${randomIntFromInterval(0, 255)}., ${randomIntFromInterval(
+          0,
+          255
+        )}., 255.0) / 255.;
+        }`;
+        createPrimitive();
+      }
+
+      // Cancel the default action to avoid it being handled twice
+      event.preventDefault();
+    }
+  }
+};
+
+function randomIntFromInterval(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomFloatFromInterval(min, max) {
+  return Math.random() * (max - min + 1) + min;
 }

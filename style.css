@@ -29,6 +29,9 @@ body {
   top: 0;
   left: 0;
   z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 canvas {
@@ -147,9 +150,105 @@ a:hover span {
 }
 /* End of Links */
 
+/* Cursor */
+@media screen and (min-width: 792px) {
+  .cursor-dot,
+  .cursor-dot-outline {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+  }
+  .cursor-dot-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+  }
+
+  .cursor-dot-outline.hover {
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+/* End of Cursor */
+
+/* Little Game */
+#counter {
+  position: absolute;
+  z-index: 2;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 0;
+  font-size: 0.8rem;
+}
+
+#counter .number {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 0;
+}
+
+#counter .sentence {
+  margin-left: 10px;
+}
+
+#counter.top {
+  top: 30px;
+}
+
+#counter.bottom {
+  bottom: 30px;
+}
+
+#counter.left {
+  left: 30px;
+}
+
+#counter.right {
+  right: 30px;
+}
+
+#counter.top.right .number {
+  background: transparent;
+}
+
+#counter.bottom.right .number {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+#counter.bottom.left .number {
+  background: rgba(0, 0, 0, 0.14);
+}
+
+@media screen and (max-width: 792px) {
+  #counter {
+    display: none !important;
+  }
+}
+/* End of Little Game */
+
 /* Entrance animations */
 h1,
-p {
+p,
+#counter {
   opacity: 0;
   animation: focus-in-contract 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s both;
 }
@@ -177,32 +276,3 @@ p {
   }
 }
 /* End of Entrance animations */
-
-/* Cursor */
-.cursor-dot,
-.cursor-dot-outline {
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: black;
-}
-.cursor-dot-outline {
-  width: 40px;
-  height: 40px;
-  border: 1px solid black;
-}
-
-.cursor-dot-outline.hover {
-  border: none;
-  background: rgba(0, 0, 0, 0.2);
-}
-/* End of Cursor */
