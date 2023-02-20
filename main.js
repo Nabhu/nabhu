@@ -14,6 +14,9 @@ function init() {
   // createGUI();
   frontDetection();
   //---
+  if (window.innerWidth < 792) {
+    mobileGame();
+  }
   animation();
 }
 
@@ -357,6 +360,57 @@ const counter = () => {
     }
   }
 };
+
+function mobileGame() {
+  const update_shape = document.querySelector(".mobile #shape");
+  if (update_shape) {
+    update_shape.addEventListener("click", () => {
+      games_played++;
+      camera.position.z = randomIntFromInterval(3, 16);
+      options.perlin.decay = randomFloatFromInterval(0, 0.3);
+      options.perlin.complex = randomFloatFromInterval(0.1, 1);
+      options.perlin.waves = randomIntFromInterval(0, 30);
+      if (games_played === 8) {
+        const nabhu = document.querySelector(".container .title");
+        if (nabhu) {
+          nabhu.textContent = "Tu trouves ça cool ?";
+        }
+        const title = document.querySelector("h1");
+        if (title) {
+          title.innerHTML = `Fais le moi savoir <span>Ça me fera plaisir ❤️</span>`;
+        }
+      }
+    });
+  }
+  const update_color = document.querySelector(".mobile #color");
+  if (update_color) {
+    update_color.addEventListener("click", () => {
+      games_played++;
+      scene.remove(scene.children[0]);
+      document.getElementById("fragmentShader").textContent = `
+        void main() {
+          gl_FragColor = vec4(${randomIntFromInterval(
+            0,
+            255
+          )}., ${randomIntFromInterval(0, 255)}., ${randomIntFromInterval(
+        0,
+        255
+      )}., 255.0) / 255.;
+        }`;
+      createPrimitive();
+      if (games_played === 8) {
+        const nabhu = document.querySelector(".container .title");
+        if (nabhu) {
+          nabhu.textContent = "Tu trouves ça cool ?";
+        }
+        const title = document.querySelector("h1");
+        if (title) {
+          title.innerHTML = `Fais le moi savoir <span>Ça me fera plaisir ❤️</span>`;
+        }
+      }
+    });
+  }
+}
 
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
