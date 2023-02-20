@@ -1,6 +1,8 @@
 import { GUI } from "dat.gui";
 import { cursor } from "./cursor.js";
 
+let games_played = 0;
+
 // Three JS
 window.addEventListener("load", init, false);
 
@@ -242,18 +244,18 @@ const counter = () => {
     counter_number.addEventListener("mouseover", setCount);
 
     function setCount() {
-      switch (parseInt(html_counter.textContent, 10)) {
-        case 3:
+      switch (html_counter.textContent) {
+        case "Youhou":
           html_counter.classList.remove("top");
           html_counter.classList.add("bottom");
-          counter_number.textContent = "2";
+          counter_number.textContent = "Raté";
           break;
-        case 2:
+        case "Raté":
           html_counter.classList.remove("right");
           html_counter.classList.add("left");
-          counter_number.textContent = "1";
+          counter_number.textContent = "Ici";
           break;
-        case 1:
+        case "Ici":
         default:
           html_counter.classList.remove("bottom");
           html_counter.classList.add("top");
@@ -294,6 +296,7 @@ const counter = () => {
               break;
           }
         }
+        games_played++;
         camera.position.z = randomIntFromInterval(3, 16);
         options.perlin.decay = randomFloatFromInterval(0, 0.3);
         options.perlin.complex = randomFloatFromInterval(0.1, 1);
@@ -324,6 +327,7 @@ const counter = () => {
               break;
           }
         }
+        games_played++;
         scene.remove(scene.children[0]);
         document.getElementById("fragmentShader").textContent = `
         void main() {
@@ -338,6 +342,16 @@ const counter = () => {
         createPrimitive();
       }
 
+      if (games_played === 8) {
+        const nabhu = document.querySelector(".container .title");
+        if (nabhu) {
+          nabhu.textContent = "Tu trouves ça cool ?";
+        }
+        const title = document.querySelector("h1");
+        if (title) {
+          title.innerHTML = `Fais le moi savoir <span>Ça me fera plaisir ❤️</span>`;
+        }
+      }
       // Cancel the default action to avoid it being handled twice
       event.preventDefault();
     }
