@@ -277,7 +277,7 @@ const counter = () => {
       }
 
       if (
-        event.key === "a" &&
+        (event.key === "a" || event.key === "A") &&
         (html_counter.classList.contains("random-shape") ||
           html_counter.classList.contains("succeed"))
       ) {
@@ -307,7 +307,7 @@ const counter = () => {
       }
 
       if (
-        event.key === "z" &&
+        (event.key === "z" || event.key === "Z") &&
         (html_counter.classList.contains("random-color") ||
           html_counter.classList.contains("succeed"))
       ) {
